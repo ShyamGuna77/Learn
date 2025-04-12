@@ -101,7 +101,7 @@ async function seedRevenue() {
   return insertedRevenue;
 }
 
-export async function GET() {
+export async function POST() {
   try {
     const result = await sql.begin((sql) => [
       seedUsers(),
@@ -114,4 +114,10 @@ export async function GET() {
   } catch (error) {
     return Response.json({ error }, { status: 500 });
   }
+}
+export function GET() {
+  return Response.json(
+    { error: "GET not allowed on this route" },
+    { status: 405 }
+  );
 }
